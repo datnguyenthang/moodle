@@ -1,4 +1,4 @@
-name: Deploy to Server Lift
+name: Deploy to Server Lift 1
 
 on:
   push:
