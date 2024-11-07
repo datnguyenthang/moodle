@@ -20,7 +20,7 @@ jobs:
       env:
         SSHPASS: ${{ secrets.SSH_PASSWORD }}
       run: |
-        rsync -avz --delete \
+        rsync -avz \
         -e "sshpass -e ssh -o StrictHostKeyChecking=no" \
         ${{ github.workspace }}/ \
-        ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/
+        ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/moodle

@@ -1,0 +1,68 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    Page footer.
+}}
+
+<footer id="s-page-footer" class="wrapper-page" {{#footerbgimg}}style="background-image: url('{{{footerbgimg}}}'  ;"{{/footerbgimg}} {{#footercustomcss}}{{{.}}}{{/footercustomcss}}>
+ <div class="{{^isfrontpage}}wrapper-fw{{/isfrontpage}} {{#isfrontpage}}wrapper-xl{{/isfrontpage}}">
+
+ {{#footerblock1}}
+ <div class="rui-footer-content rui-footer-block--1">
+ <div class="mb-5">
+ {{{ footerblock1 }}}
+ </div>
+ </div>
+ <hr class="rui-footer-hr--1" />
+ {{/footerblock1}}
+ {{#footerblock2}}
+ <div class="rui-footer-content rui-footer-block--2">
+
+ </div>
+ {{/footerblock2}}
+
+
+    {{#displaycustomalert}}
+    <div class="rui-custom-alert rui-custom-alert--light alert alert-dismissible fade {{#closecustomalert}}hide_alert{{/closecustomalert}}" role="alert">
+        <div class="rui-custom-alert-content">
+        {{{customalerthtml}}}
+        </div>
+        <button class="rui-custom-alert-close {{#closecustomalert}}close_once{{/closecustomalert}}" type="button" data-dismiss="alert" aria-label="Close">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 6.75L6.75 17.25"></path>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 6.75L17.25 17.25"></path>
+            </svg>
+        </button>
+    </div>
+    {{#closecustomalert}}
+    {{#js}}
+        $(document).on('click', '.close_once', function() {
+            localStorage.setItem('hideAlert', 'true');
+        });
+
+        $(document).ready(function() {
+            let hide = localStorage.getItem('hideAlert');
+            if (hide === 'false' || hide === null) {
+                $('.hide_alert').addClass('show');
+            }
+        });
+    {{/js}}
+    {{/closecustomalert}}
+    {{/displaycustomalert}}
+
+ 
+    {{{ output.standard_end_of_body_html }}}
