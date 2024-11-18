@@ -15,13 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for Purity Course Intro block.
+ * Version.
+ *
+ * @package   tool_excimer
+ * @author    Nigel Chapman <nigelchapman@catalyst-au.net>
+ * @copyright 2021, Catalyst IT
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_lift_hotnews';  
-$plugin->version = 2022062304;
-$plugin->requires = 2019111800;
+$plugin->version = 2024091600;
+$plugin->release = 2024091600;
+$plugin->requires = 2017051500;    // Moodle 3.3 for Totara support.
+$plugin->supported = [35, 401];     // Supports Moodle 3.5 or later.
+// TODO $plugin->incompatible = ;  // Available as of Moodle 3.9.0 or later.
+
+$plugin->component = 'tool_excimer';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.0.0';
+
+$plugin->dependencies = [];

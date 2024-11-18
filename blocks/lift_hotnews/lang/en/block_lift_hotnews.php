@@ -23,7 +23,7 @@ $string['pluginname'] = 'Lift hotnews';
 $string['purity_course_intro'] = 'Course Intro';
 $string['purity_course_intro:addinstance'] = 'Add a new Course Intro block';
 $string['purity_course_intro:myaddinstance'] = 'Add a new Course Intro block to the My Moodle page';
-$string['lift_hotnews'] = 'Lift hotnews';
+$string['lift_hotnews'] = 'Hotnews';
 
 // Options
 $string['show_header'] = 'Show Block Header';
@@ -48,3 +48,4 @@ $string['last_modified_date'] = 'Last Modified Date';
 $string['start_end_date'] = 'Start-End Date';
 $string['enrolments'] = 'Students Enrolled';
 $string['category'] = 'Category';
+$string['manage_hotnews'] = 'Manage hotnews';

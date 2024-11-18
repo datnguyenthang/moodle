@@ -15,13 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for Purity Course Intro block.
+ * Unfishied Excimer profiling data in a table.
+ *
+ * @package   tool_excimer
+ * @author    Jason den Dulk <jasondendulk@catalyst-au.net>
+ * @copyright 2021, Catalyst IT
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+use tool_excimer\profile_table;
+use tool_excimer\profile_table_page;
 
-$plugin->component = 'block_lift_hotnews';  
-$plugin->version = 2022062304;
-$plugin->requires = 2019111800;
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.0.0';
+require_once('../../../config.php');
+require_once($CFG->libdir.'/adminlib.php');
+
+admin_externalpage_setup('tool_excimer_report_unfinished');
+
+$url = new moodle_url("/admin/tool/excimer/unfinished.php");
+
+$table = new profile_table('profile_table_unfinished');
+$table->sortable(true, 'created', SORT_DESC);
+$table->add_filter('finished', 0);
+profile_table_page::display($table, $url);

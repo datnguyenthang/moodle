@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="admin/tool/excimer/db" VERSION="20230829" COMMENT="XMLDB file for Moodle admin/tool/excimer"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="tool_excimer_profiles" COMMENT="Store request-level data for the excimer sampling profiler">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="reason" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="Reason the profile was done (manual, auto etc)"/>
+        <FIELD NAME="scripttype" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="Script type (www, cli, ajax, ws)"/>
+        <FIELD NAME="method" TYPE="char" LENGTH="7" NOTNULL="true" SEQUENCE="false" COMMENT="HTTP method, if relevant"/>
+        <FIELD NAME="created" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="time in epoch seconds"/>
+        <FIELD NAME="finished" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="finish time in epoch seconds (0 if profile is incomplete)"/>
+        <FIELD NAME="duration" TYPE="number" LENGTH="12" NOTNULL="true" SEQUENCE="false" DECIMALS="6" COMMENT="Time duration of the profile in seconds."/>
+        <FIELD NAME="request" TYPE="char" LENGTH="256" NOTNULL="true" SEQUENCE="false" COMMENT="URL, command, or similar identifying string"/>
+        <FIELD NAME="scriptgroup" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Value to use for grouping."/>
+        <FIELD NAME="pathinfo" TYPE="char" LENGTH="256" NOTNULL="true" SEQUENCE="false" COMMENT="See PHP documentation on $_SERVER['PATH_INFO'] for more information."/>
+        <FIELD NAME="parameters" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Request variables or command arguments"/>
+        <FIELD NAME="sessionid" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Session ID"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="User ID"/>
+        <FIELD NAME="maxstackdepth" TYPE="int" LENGTH="11" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Maximum stack depth across all samples"/>
+        <FIELD NAME="cookies" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Are any cookies set?"/>
+        <FIELD NAME="buffering" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Is buffering set?"/>
+        <FIELD NAME="responsecode" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="HTTP response code, or 0/1 for command line"/>
+        <FIELD NAME="referer" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Refering URL, if any"/>
+        <FIELD NAME="pid" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Process ID"/>
+        <FIELD NAME="hostname" TYPE="char" LENGTH="256" NOTNULL="true" SEQUENCE="false" COMMENT="Host name (empty for CLI scripts)"/>
+        <FIELD NAME="useragent" TYPE="char" LENGTH="256" NOTNULL="true" SEQUENCE="false" COMMENT="User agent (empty for CLI scripts)"/>
+        <FIELD NAME="versionhash" TYPE="char" LENGTH="256" NOTNULL="true" SEQUENCE="false" COMMENT="All version hash"/>
+        <FIELD NAME="datasize" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Size of the profile data (in bytes)"/>
+        <FIELD NAME="numsamples" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Number of samples taken"/>
+        <FIELD NAME="flamedatad3" TYPE="binary" NOTNULL="false" SEQUENCE="false" COMMENT="Compressed JSON structure compatible with d3-flame-graph."/>
+        <FIELD NAME="memoryusagedatad3" TYPE="binary" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="contenttypecategory" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false" COMMENT="core_filetypes' resolved string value"/>
+        <FIELD NAME="contenttypekey" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false" COMMENT="core_filetypes's key from the types available."/>
+        <FIELD NAME="contenttypevalue" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false" COMMENT="Raw content type as returned from the content-type response header, if available"/>
+        <FIELD NAME="dbreads" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="dbwrites" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="dbreplicareads" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="The user who created/modified the object"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="The timestamp at which the record was created"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="The timestamp at which the record was modified"/>
+        <FIELD NAME="memoryusagemax" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="false" COMMENT="Maximum memory usage recorded for this given run. Note that CLI profiles might store the max for previous connected runs within the same process."/>
+        <FIELD NAME="samplerate" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="false" COMMENT="Base sample rate at the time the profile was recorded"/>
+        <FIELD NAME="lockreason" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Holds reasons for keeping this profile. Any non-empty value will prevent purging."/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="The id of $COURSE at the time of profiling"/>
+        <FIELD NAME="lockheld" TYPE="number" LENGTH="12" NOTNULL="false" SEQUENCE="false" DECIMALS="6" COMMENT="Length of time a lock was held in seconds"/>
+        <FIELD NAME="lockwait" TYPE="number" LENGTH="12" NOTNULL="false" SEQUENCE="false" DECIMALS="6" COMMENT="Wait time on a lock in seconds"/>
+        <FIELD NAME="lockwaiturl" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="URL of the page holding the lock, if known"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="createdindex" UNIQUE="false" FIELDS="created"/>
+        <INDEX NAME="durationindex" UNIQUE="false" FIELDS="duration"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="tool_excimer_page_groups" COMMENT="Metadata about groups of profiles.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Group name"/>
+        <FIELD NAME="month" TYPE="int" LENGTH="6" NOTNULL="true" SEQUENCE="false" COMMENT="Month in YYYYMM format."/>
+        <FIELD NAME="fuzzycount" TYPE="int" LENGTH="11" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="A approximate count of hits for this group using the approximate counting algorithm."/>
+        <FIELD NAME="fuzzydurationcounts" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Breakdown of fuzzy counts for durations"/>
+        <FIELD NAME="fuzzydurationsum" TYPE="int" LENGTH="11" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Estimate of total time spent (in seconds) serving this group using fuzzy counts."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="pagegroup" UNIQUE="true" FIELDS="name, month"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

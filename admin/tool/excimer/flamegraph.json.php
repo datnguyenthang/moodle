@@ -15,13 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for Purity Course Intro block.
+ * D3.js flamegraph data in JSON format.
+ *
+ * @package   tool_excimer
+ * @author    Nigel Chapman <nigelchapman@catalyst-au.net>
+ * @copyright 2021, Catalyst IT
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+use tool_excimer\profile;
 
-$plugin->component = 'block_lift_hotnews';  
-$plugin->version = 2022062304;
-$plugin->requires = 2019111800;
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.0.0';
+require_once(__DIR__ . '/../../../config.php');
+
+require_once($CFG->libdir.'/adminlib.php');
+require_login(null, false);
+require_capability('moodle/site:config', context_system::instance());
+
+$profileid = required_param('profileid', PARAM_INT);
+
+$profile = new profile($profileid);
+
+header('Content-Type: application/json; charset: utf-8');
+echo $profile->get_flamedatad3json();
