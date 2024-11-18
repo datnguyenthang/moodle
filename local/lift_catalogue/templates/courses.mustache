@@ -1,0 +1,23 @@
+{{#coursesData}}
+    <div class="col-sm-6 col-xl-4 mb-4">
+        <div class="card">
+            <a href="/course/view.php?id={{id}}">
+                <img src="{{imageurl}}" class="card-img-top" alt="{{name}}">
+            </a>
+            <div class="card-body p-2">
+                <h5 class="card-title text-center">{{name}}</h5>
+                <p class="card-text">{{#str}} coursecode, local_lift_catalogue {{/str}}: {{code}}</p>
+                <p class="card-text">{{#str}} duration, local_lift_catalogue {{/str}}: {{duration}} ({{#str}} hours {{/str}})</p>
+                <p class="card-text">{{#str}} coursetype, local_lift_catalogue {{/str}}: {{type}}</p>
+                <div class="text-center">
+                    <a href="{{link}}" class="btn btn-primary text-center">{{#str}} viewcourse, local_lift_catalogue {{/str}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/coursesData}}
+{{^coursesData}}
+    <div class="col-12 text-center">
+        <p>{{#str}} nocoursefound, local_lift_catalogue {{/str}}</p>
+    </div>
+{{/coursesData}}

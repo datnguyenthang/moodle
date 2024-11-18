@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="typecatalogue" class="form-label">{{#str}} coursecategory, local_lift_catalogue {{/str}}</label>
+            <select class="form-control form-select" id="typecatalogue">
+                    <option value="0" selected>{{#str}} all {{/str}}</option>
+                {{#category}}
+                    <option value="{{id}}">{{path}}</option>
+                {{/category}}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="methodFilter" class="form-label">{{#str}} coursetype, local_lift_catalogue {{/str}}</label>
+            <select class="form-control form-select" id="methodFilter">
+                <option value="0" selected>{{#str}} all {{/str}}</option>
+                {{#courseType}}
+                    <option value="{{id}}">{{label}}</option>
+                {{/courseType}}
+            </select>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <tables>
+        <table name="lift_catalogue_categories">
+            <fields>
+                <field name="id" type="integer" sequence="block_catalogue_categories_seq" primarykey="true" notnull="true"/>
+                <field name="parent_id" type="int" notnull="false"/>
+                <field name="name" type="text" notnull="true"/>
+                <field name="status" type="int" length="2" notnull="true"/>
+                <field name="timecreated" type="int" length="10" notnull="false"/>
+                <field name="timemodified" type="int" length="10" notnull="false"/>
+                <field name="createdby" type="int" length="10" notnull="false"/>
+                <field name="modifiedby" type="int" length="10" notnull="false"/>
+            </fields>
+        </table>
+        <table name="lift_catalogue_courses">
+            <fields>
+                <field name="id" type="integer" sequence="block_catalogue_courses_seq" primarykey="true" notnull="true"/>
+                <field name="category_id" type="integer" notnull="false"/>
+                <field name="name" type="text" notnull="true"/>
+                <field name="description" type="text" notnull="false"/>
+                <field name="duration" type="text" notnull="false"/>
+                <field name="code" type="varchar" length="255" notnull="false"/>
+                <field name="pin" type="int" length="2" notnull="true"/>
+                <field name="type" type="int" length="10" notnull="true" comment="0:online, 1:offline, 2 pledge"/>
+                <field name="status" type="int" length="2" notnull="false"/>
+                <field name="timecreated" type="int" length="10" notnull="false"/>
+                <field name="timemodified" type="int" length="10" notnull="false"/>
+                <field name="createdby" type="int" length="10" notnull="false"/>
+                <field name="modifiedby" type="int" length="10" notnull="false"/>
+            </fields>
+        </table>
+    </tables>
+</database>

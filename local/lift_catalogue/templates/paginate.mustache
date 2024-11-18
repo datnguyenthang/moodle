@@ -1,0 +1,74 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <!-- First Page Link -->
+        {{#first}}
+        <li class="page-item">
+            <a class="page-link" href="#" data-page="{{first}}" aria-label="First">
+                <span aria-hidden="true">&laquo;&laquo;</span>
+            </a>
+        </li>
+        {{/first}}
+        {{^first}}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                <span aria-hidden="true">&laquo;&laquo;</span>
+            </a>
+        </li>
+        {{/first}}
+
+        <!-- Previous Page Link -->
+        {{#previous}}
+        <li class="page-item">
+            <a class="page-link" href="#" data-page="{{previous}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {{/previous}}
+        {{^previous}}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {{/previous}}
+
+        <!-- Page Numbers -->
+        {{#pages}}
+        <li class="page-item {{#active}}active{{/active}}">
+            <a class="page-link" href="#" data-page="{{index}}">{{displayindex}}</a>
+        </li>
+        {{/pages}}
+
+        <!-- Next Page Link -->
+        {{#next}}
+        <li class="page-item">
+            <a class="page-link" href="#" data-page="{{next}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {{/next}}
+        {{^next}}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {{/next}}
+
+        <!-- Last Page Link -->
+        {{#last}}
+        <li class="page-item">
+            <a class="page-link" href="#" data-page="{{last}}" aria-label="Last">
+                <span aria-hidden="true">&raquo;&raquo;</span>
+            </a>
+        </li>
+        {{/last}}
+        {{^last}}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                <span aria-hidden="true">&raquo;&raquo;</span>
+            </a>
+        </li>
+        {{/last}}
+    </ul>
+</nav>
